@@ -11,10 +11,13 @@ project(Spire_SCIRun)
 #-------------------------------------------------------------------------------
 
 # Feel free to use any method of defining sources.
-file (GLOB Source_Root
-  "*.cpp"
-  "*.h"
+file (GLOB Source
+  "src/*.cpp"
+  "src/*.h"
   )
+
+# Expose header files at the root of the project (the public header files).
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 #-------------------------------------------------------------------------------
 # Spire module setup
@@ -45,14 +48,5 @@ endif()
 # require 2.8.11 anyways. But I don't see a pressing need for this right now
 # as we shouldn't run into any linkage problems -- but it's interesting
 # none-the-less.
-add_library(${SPIRE_OUTPUT_MODULE_NAME}
-  )
-
-add_dependencies(spireview Spire)
-
-target_link_libraries(spireview 
-  ${SPIRE_LIBRARIES} 
-  ${QT_OPENGL_LIBRARY}
-  ${OPENGL_LIBRARIES}
-  ${QT_LIBRARIES})
+add_library(${SPIRE_OUTPUT_MODULE_NAME} ${Source})
 
