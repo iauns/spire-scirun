@@ -22,18 +22,30 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 #-------------------------------------------------------------------------------
 # Spire module setup
 #-------------------------------------------------------------------------------
+
+# Test to see if we can see our parent spire core target (unlikely, since as
+# an external project we will want a degree of separation between the code
+# and the parent).
+# If we can, it will be much easier to handle dependencies. Otherwise we
+# will need to pass in the appropriate core parameters and create a dummy
+# core target with which to add extensions.
+# This almost suggests that extensions should be handled like subdirectories
+# instead of external projects -- then we can share the benefits of a singular
+# core.
+message("Spire target: ${SPIRE_PARENT_TARGET}")
+get_target_property(CORE_INCLUDE_DIRS ${SPIRE_PARENT_TARGET} SPIRE_CORE_INCLUDE_DIRS)
+messoge("Core include dirs: ${CORE_INCLUDE_DIRS}")
+
+# Setup SpirePM module currently in use.
+message("Spire CMake module path: ${SPIRE_CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${SPIRE_CMAKE_MODULE_PATH})
+include(SpirePM)
+
 # Ensure we were passed the spire header files. Linkage will be handled for this
 # static module automatically higher in the chain.
-#set(SPIRE_CORE_INCLUDE_DIR "" CACHE INTERNAL "Path to core spire include directories.")
-message("Core include: ${SPIRE_CORE_INCLUDE_DIRS}")
+message("Core directory: ${SPIRE_CORE_DIR}")
 include_directories(${SPIRE_CORE_INCLUDE_DIRS})
 
-# Ensure we have been passed an output name for our module.
-#set(SPIRE_OUTPUT_MODULE_NAME "" CACHE INTERNAL "Output module name")
-
-#if ( SPIRE_OUTPUT_MODULE_NAME STREQUAL "" )
-#  message(SEND_ERROR "SPIRE_OUTPUT_MODULE_NAME not set. Set to a valid output name.")
-#endif()
 message("Core include: ${SPIRE_OUTPUT_MODULE_NAME}")
 
 #-------------------------------------------------------------------------------
