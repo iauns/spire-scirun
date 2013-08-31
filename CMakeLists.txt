@@ -34,7 +34,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 # core.
 message("Spire target: ${SPIRE_PARENT_TARGET}")
 get_target_property(CORE_INCLUDE_DIRS ${SPIRE_PARENT_TARGET} SPIRE_CORE_INCLUDE_DIRS)
-messoge("Core include dirs: ${CORE_INCLUDE_DIRS}")
+message("Core include dirs: ${CORE_INCLUDE_DIRS}")
 
 # Setup SpirePM module currently in use.
 message("Spire CMake module path: ${SPIRE_CMAKE_MODULE_PATH}")
