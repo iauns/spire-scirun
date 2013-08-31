@@ -25,13 +25,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 # Ensure we were passed the spire header files. Linkage will be handled for this
 # static module automatically higher in the chain.
 #set(SPIRE_CORE_INCLUDE_DIR "" CACHE INTERNAL "Path to core spire include directories.")
-message("Core include: ${SPIRE_CORE_INCLUDE_DIR}")
-
-if(NOT SPIRE_CORE_INCLUDE_DIR/Spire/Interface.h)
-  message(SEND_ERROR "Can't find Spire/Interface.h in ${SPIRE_CORE_INCLUDE_DIR}")
-endif()
-
-include_directories(${SPIRE_CORE_INCLUDE_DIR})
+message("Core include: ${SPIRE_CORE_INCLUDE_DIRS}")
+include_directories(${SPIRE_CORE_INCLUDE_DIRS})
 
 # Ensure we have been passed an output name for our module.
 #set(SPIRE_OUTPUT_MODULE_NAME "" CACHE INTERNAL "Output module name")
