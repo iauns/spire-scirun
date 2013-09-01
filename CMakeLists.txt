@@ -55,8 +55,8 @@ message("Spire core prefix: ${MOD_SPIRE_CORE_PREFIX}")
 message("Spire src directory: ${MOD_SPIRE_CORE_SRC}")
 
 # Setup SpirePM module currently in use.
-message("Spire CMake module path: ${SPIRE_CMAKE_MODULE_PATH}")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${SPIRE_CMAKE_MODULE_PATH})
+message("Spire CMake module path: ${MOD_SPIRE_CMAKE_MODULE_PATH}")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${MOD_SPIRE_CMAKE_MODULE_PATH})
 include(SpirePM)
 
 Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY)
