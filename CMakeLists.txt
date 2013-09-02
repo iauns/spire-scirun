@@ -31,7 +31,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${MOD_SPIRE_CMAKE_MODULE_PATH})
 include(SpirePM)
 
 # Build 3rd party include directories (this is a bit of a hack due to the
-Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY ${MODE_SPIRE_CORE_SRC})
+Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY ${MOD_SPIRE_CORE_SRC})
 
 # Ensure we were passed the spire header files. Linkage will be handled for this
 # static module automatically higher in the chain.
