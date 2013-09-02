@@ -1,24 +1,6 @@
 cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
 project(Spire_SCIRun)
 
-# Could potentially perform an include(SpirePM) here if we are given the
-# appropriate module path. We could then use a macro for most of the code below,
-# and only need to specify the source files to be compiled. Everything else
-# would be handled by the spire module system.
-
-#-------------------------------------------------------------------------------
-# Module sources
-#-------------------------------------------------------------------------------
-
-# Feel free to use any method of defining sources.
-file (GLOB Source
-  "src/*.cpp"
-  "src/*.h"
-  )
-
-# Expose header files at the root of the project (the public header files).
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
 #-------------------------------------------------------------------------------
 # Spire module setup
 #-------------------------------------------------------------------------------
@@ -39,6 +21,33 @@ include_directories(${MOD_SPIRE_CORE_SRC})
 include_directories(SYSTEM ${SPIRE_CORE_THIRD_PARTY})
 
 message("Core include: ${SPIRE_OUTPUT_MODULE_NAME}")
+
+#-------------------------------------------------------------------------------
+# Compiler settings.
+#-------------------------------------------------------------------------------
+
+if (UNIX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif ()
+
+if (APPLE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -Wall -Wextra -Werror -Wconversion -Wshadow")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
+endif ()
+
+#-------------------------------------------------------------------------------
+# Module sources
+#-------------------------------------------------------------------------------
+
+# Feel free to use any method of defining sources.
+file (GLOB Source
+  "src/*.cpp"
+  "src/*.h"
+  )
+
+# Expose header files at the root of the project (the public header files).
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 
 #-------------------------------------------------------------------------------
 # Static library setup
