@@ -12,7 +12,9 @@ message("Spire CMake module path: ${MOD_SPIRE_CMAKE_MODULE_PATH}")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${MOD_SPIRE_CMAKE_MODULE_PATH})
 include(SpirePM)
 
-# Build 3rd party include directories (this is a bit of a hack due to the
+# Build 3rd party include directories (this kind of hack will be replaced
+# in any subsquent manager -- it has to deal with externalproject and the
+# way it handles parsing its arguments).
 Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY ${MOD_SPIRE_CORE_SRC})
 
 # Ensure we were passed the spire header files. Linkage will be handled for this
@@ -47,7 +49,6 @@ file (GLOB Source
 
 # Expose header files at the root of the project (the public header files).
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
 
 #-------------------------------------------------------------------------------
 # Static library setup
