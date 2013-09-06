@@ -22,7 +22,10 @@ Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY ${MOD_SPIRE_CORE_SRC})
 include_directories(${MOD_SPIRE_CORE_SRC})
 include_directories(SYSTEM ${SPIRE_CORE_THIRD_PARTY})
 
-message("Core include: ${SPIRE_OUTPUT_MODULE_NAME}")
+# These function will conditionally coper the shaders or assets depending on the
+# existence of the output shader / asset directories.
+Spire_CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
+Spire_CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
 
 #-------------------------------------------------------------------------------
 # Compiler settings.
