@@ -63,8 +63,17 @@ function (CopyAssets src_asset_dir dest_asset_dir)
   endif()
 endfunction()
 
-CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
-CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
+if (DEFINED OUTPUT_SHADER_DIR)
+  CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
+else()
+  message(WARNING "Not copying shader files. OUTPUT_SHADER_DIR variable not found.")
+endif()
+
+if (DEFINED OUTPUT_ASSET_DIR)
+  CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
+else()
+  message(WARNING "Not copying asset files. OUTPUT_ASSET_DIR variable not found.")
+endif()
 
 #-------------------------------------------------------------------------------
 # Compiler settings.
