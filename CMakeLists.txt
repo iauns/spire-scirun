@@ -63,15 +63,12 @@ function (CopyAssets src_asset_dir dest_asset_dir)
   endif()
 endfunction()
 
-# These function will conditionally coper the shaders or assets depending on the
-# existence of the output shader / asset directories.
 CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
 CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
 
 #-------------------------------------------------------------------------------
 # Compiler settings.
 #-------------------------------------------------------------------------------
-
 if (UNIX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -82,9 +79,7 @@ if (UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
   endif ()
-
 endif ()
-
 
 #-------------------------------------------------------------------------------
 # Module sources
@@ -108,5 +103,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 # require 2.8.11 anyways. But I don't see a pressing need for this right now
 # as we shouldn't run into any linkage problems -- but it's interesting
 # none-the-less.
-add_library(${SPIRE_OUTPUT_MODULE_NAME} ${Source})
+add_library(${CPM_LIB_TARGET_NAME} ${Source})
+target_link_libraries(${CPM_LIB_TARGET_NAME} ${CPM_LIBRARIES})
 
