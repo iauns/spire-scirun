@@ -1,31 +1,72 @@
 cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
 project(Spire_SCIRun)
 
+#-----------------------------------------------------------------------
+# CPM configuration
+#-----------------------------------------------------------------------
+set(CPM_MODULE_NAME spire_scirun)
+set(CPM_LIB_TARGET_NAME ${CPM_MODULE_NAME})
+
+if ((DEFINED CPM_DIR) AND (DEFINED CPM_UNIQUE_ID) AND (DEFINED CPM_OUTPUT_LIB_NAME))
+  set(CPM_LIB_TARGET_NAME ${CPM_OUTPUT_LIB_NAME})
+
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CPM_DIR})
+  include(CPM)
+else()
+  set (CPM_DIR "${CMAKE_CURRENT_BINARY_DIR}/cpm-packages" CACHE TYPE STRING)
+  find_package(Git)
+  if(NOT GIT_FOUND)
+    message(FATAL_ERROR "CPM requires Git.")
+  endif()
+  if (NOT EXISTS ${CPM_DIR}/CPM.cmake)
+    execute_process(
+      COMMAND "${GIT_EXECUTABLE}" clone https://github.com/iauns/cpm ${CPM_DIR}
+      RESULT_VARIABLE error_code
+      OUTPUT_VARIABLE head_sha
+      )
+    if(error_code)
+      message(FATAL_ERROR "CPM failed to get the hash for HEAD")
+    endif()
+  endif()
+  include(${CPM_DIR}/CPM.cmake)
+endif()
+
+# Ensure spire module is present. We will use a pre-existing verision if found.
+CPM_AddModule("spire"
+  GIT_REPOSITORY "https://github.com/SCIInstitute/spire"
+  GIT_TAG "origin/master"
+  USE_EXISTING_VER TRUE
+  )
+
+CPM_InitModule(${CPM_MODULE_NAME})
+
 #-------------------------------------------------------------------------------
-# Spire module setup
+# Copy shaders and assets to OUTPUT_SHADER_DIR and OUTPUT_ASSET_DIR.
 #-------------------------------------------------------------------------------
+function (CopyShaders src_shader_dir dest_shader_dir)
+  if (NOT dest_shader_dir STREQUAL "")
+    file(COPY ${src_shader_dir}/ DESTINATION ${dest_shader_dir}
+      FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+      DIRECTORY_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                            GROUP_READ
+                            WORLD_READ WORLD_EXECUTE)
+  endif()
+endfunction()
 
-message("Spire src directory: ${MOD_SPIRE_CORE_SRC}")
-
-# Setup SpirePM module currently in use.
-message("Spire CMake module path: ${MOD_SPIRE_CMAKE_MODULE_PATH}")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${MOD_SPIRE_CMAKE_MODULE_PATH})
-include(SpirePM)
-
-# Build 3rd party include directories (this kind of hack will be replaced
-# in any subsquent manager -- it has to deal with externalproject and the
-# way it handles parsing its arguments).
-Spire_BuildCoreThirdPartyIncludes(SPIRE_CORE_THIRD_PARTY ${MOD_SPIRE_CORE_SRC})
-
-# Ensure we were passed the spire header files. Linkage will be handled for this
-# static module automatically higher in the chain.
-include_directories(${MOD_SPIRE_CORE_SRC})
-include_directories(SYSTEM ${SPIRE_CORE_THIRD_PARTY})
+function (CopyAssets src_asset_dir dest_asset_dir)
+  if (NOT dest_asset_dir STREQUAL "")
+    file(COPY ${src_asset_dir}/ DESTINATION ${dest_asset_dir}
+      FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
+      DIRECTORY_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                            GROUP_READ
+                            WORLD_READ WORLD_EXECUTE)
+  endif()
+endfunction()
 
 # These function will conditionally coper the shaders or assets depending on the
 # existence of the output shader / asset directories.
-Spire_CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
-Spire_CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
+CopyShaders(${CMAKE_CURRENT_SOURCE_DIR}/shaders ${OUTPUT_SHADER_DIR})
+CopyAssets(${CMAKE_CURRENT_SOURCE_DIR}/assets ${OUTPUT_ASSET_DIR})
 
 #-------------------------------------------------------------------------------
 # Compiler settings.
