@@ -32,8 +32,8 @@
 #include "SciBall.h"
 #include "Spire/Core/GLMathUtil.h"
 
-namespace Spire {
-namespace SCIRun {
+namespace spire {
+namespace scirun {
 
 //------------------------------------------------------------------------------
 SciBall::SciBall(const V3& center, float radius, const M44& screenToTCS) :
@@ -138,6 +138,6 @@ M44 SciBall::getTransformation() const
 }
 
 
-} // SCIRun
-} // SpireSCIRun
+} // namespace scirun
+} // namespace spire
 

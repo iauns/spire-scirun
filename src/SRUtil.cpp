@@ -33,8 +33,8 @@
 
 #include "Spire/Core/Common.h"
 
-namespace Spire {
-namespace SCIRun {
+namespace spire {
+namespace scirun {
 
 size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
                                   size_t stride, float normalLength,
@@ -111,6 +111,6 @@ size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
   return numInVertices;
 }
 
-} // namespace SCIRun
-} // namespace Spire
+} // namespace scirun
+} // namespace spire
 

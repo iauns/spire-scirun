@@ -37,8 +37,8 @@
 #include <vector>
 #include <memory>
 
-namespace Spire {
-namespace SCIRun {
+namespace spire {
+namespace scirun {
 
 // Misc SCIRun utilities.
 
@@ -61,7 +61,7 @@ size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
                                   size_t posOffset = 0,
                                   size_t normOffset = sizeof(float) * 3);
 
-} // namespace SCIRun
-} // namespace Spire
+} // namespace scirun
+} // namespace spire
 
 #endif 

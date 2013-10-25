@@ -32,8 +32,8 @@
 #include "SRCamera.h"
 #include "SRCommonUniforms.h"
 
-namespace Spire {
-namespace SCIRun {
+namespace spire {
+namespace scirun {
 
 //------------------------------------------------------------------------------
 SRCamera::SRCamera(SRInterface& iface) :
@@ -100,5 +100,5 @@ void SRCamera::setViewTransform(const Spire::M44& trafo)
   mInterface.addGlobalUniform(std::get<0>(SRCommonUniforms::getCameraUpVec()), V3(mV[1].xyz()));
 }
 
-} // namespace SCIRun
-} // namespace Spire
+} // namespace scirun
+} // namespace spire

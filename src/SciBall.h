@@ -33,10 +33,10 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SCIBALL_H
 
 #include <cstdint>
-#include "Spire/Core/Math.h"
+#include "spire/src/Math.h"
 
-namespace Spire { 
-namespace SCIRun { 
+namespace spire { 
+namespace scirun { 
 
 /// A reimplementation of Ken Shoemake's arcball camera. SCIRun 4's camera
 /// system is based completely off of Ken's code. The Code appears in
@@ -121,7 +121,7 @@ private:
   M44   mScreenToTCS;
 };
 
-} // namespace SCIRun
-} // namespace Spire
+} // namespace scirun
+} // namespace spire
 
 #endif 

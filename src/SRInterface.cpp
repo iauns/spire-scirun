@@ -38,8 +38,8 @@
 
 using namespace std::placeholders;
 
-namespace Spire {
-namespace SCIRun {
+namespace spire {
+namespace scirun {
 
 //------------------------------------------------------------------------------
 SRInterface::SRInterface(std::shared_ptr<Context> context,
@@ -171,5 +171,5 @@ void SRInterface::buildAndApplyCameraTransform()
   mCamera->setViewTransform(finalTrafo);
 }
 
-} // namespace SCIRun
-} // namespace Spire
+} // namespace scirun
+} // namespace spire

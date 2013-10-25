@@ -34,10 +34,9 @@
 
 #include <tuple>
 
-#include "Spire/Core/ShaderUniformStateManTemplates.h"
+#include "spire/src/ShaderUniformStateManTemplates.h"
 
-namespace Spire
-{
+namespace spire {
 
 /// Common uniforms used by Spire.
 /// \todo Look into the ability to rename these uniforms in the future. This is
@@ -57,6 +56,6 @@ public:
 
 };
 
-} // namespace Spire
+} // namespace spire
 
 #endif 

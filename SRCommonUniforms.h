@@ -36,8 +36,7 @@
 
 #include "Spire/Core/ShaderUniformStateManTemplates.h"
 
-namespace Spire
-{
+namespace spire {
 
 /// Common uniforms used by Spire.
 /// \todo Look into the ability to rename these uniforms in the future. This is
