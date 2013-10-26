@@ -32,8 +32,8 @@
 #ifndef SPIRE_APPSPECIFIC_SCIRUN_SRUNCAMERA_H
 #define SPIRE_APPSPECIFIC_SCIRUN_SRUNCAMERA_H
 
+#include "../SRInterface.h"
 #include "spire/src/Common.h"
-#include "SRInterface.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {
 
