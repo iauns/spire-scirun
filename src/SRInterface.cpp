@@ -69,7 +69,7 @@ void SRInterface::eventResize(size_t width, size_t height)
   mScreenHeight = height; 
 
   // Ensure glViewport is called appropriately.
-  Hub::RemoteFunction resizeFun =
+  spire::Hub::RemoteFunction resizeFun =
       std::bind(spire::InterfaceImplementation::resize, _1, width, height);
   mHub->addFunctionToThreadQueue(resizeFun);
 }
