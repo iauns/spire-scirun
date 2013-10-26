@@ -29,6 +29,7 @@
 /// \author James Hughes
 /// \date   August 2013
 
+#include "namespaces.h"
 #include "SRUtil.h"
 
 #include "spire/src/Common.h"
