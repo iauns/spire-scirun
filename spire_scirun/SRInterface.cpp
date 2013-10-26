@@ -30,9 +30,9 @@
 /// \date   February 2013
 
 #include "namespaces.h"
-#include "../SRInterface.h"
-#include "SciBall.h"
-#include "SRCamera.h"
+#include "SRInterface.h"
+#include "src/SciBall.h"
+#include "src/SRCamera.h"
 
 #include "spire/src/Hub.h"
 #include "spire/src/InterfaceImplementation.h"

@@ -94,24 +94,20 @@ endif ()
 # Module sources
 #-------------------------------------------------------------------------------
 
-# Feel free to use any method of defining sources.
-file (GLOB Source
-  "src/*.cpp"
-  "src/*.h"
+file (GLOB Root
+  "spire_scirun/*.cpp"
+  "spire_scirun/*.h"
   )
 
-# Expose header files at the root of the project (the public header files).
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+file (GLOB Source
+  "spire_scirun/src/*.cpp"
+  "spire_scirun/src/*.h"
+  )
 
 #-------------------------------------------------------------------------------
 # Static library setup
 #-------------------------------------------------------------------------------
 
-# Possibly use: http://www.cmake.org/Wiki/CMake/Tutorials/Object_Library
-# if we have linkage problems. This OBJECT_LIBRARY is new in 2.8.8, but we
-# require 2.8.11 anyways. But I don't see a pressing need for this right now
-# as we shouldn't run into any linkage problems -- but it's interesting
-# none-the-less.
-add_library(${CPM_LIB_TARGET_NAME} ${Source})
+add_library(${CPM_LIB_TARGET_NAME} ${Root} ${Source})
 target_link_libraries(${CPM_LIB_TARGET_NAME} ${CPM_LIBRARIES})
 
