@@ -29,9 +29,10 @@
 /// \author James Hughes
 /// \date   March 2013
 
+#include "../SRCommonUniforms.h"
+
 #include "namespaces.h"
 #include "SRCamera.h"
-#include "SRCommonUniforms.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {
 
