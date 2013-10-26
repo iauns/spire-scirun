@@ -31,7 +31,7 @@
 
 #include "namespaces.h"
 #include "SciBall.h"
-#include "spire/Core/GLMathUtil.h"
+#include "spire/src/GLMathUtil.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {
 

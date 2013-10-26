@@ -31,7 +31,7 @@
 
 #include "SRUtil.h"
 
-#include "spire/Core/Common.h"
+#include "spire/src/Common.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {
 

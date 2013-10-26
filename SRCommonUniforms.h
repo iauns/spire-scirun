@@ -34,7 +34,7 @@
 
 #include <tuple>
 
-#include "Spire/Core/ShaderUniformStateManTemplates.h"
+#include "spire/src/ShaderUniformStateManTemplates.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {
 
