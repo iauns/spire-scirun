@@ -42,7 +42,7 @@ using namespace std::placeholders;
 namespace CPM_SPIRE_SCIRUN_NS {
 
 //------------------------------------------------------------------------------
-SRInterface::SRInterface(std::shared_ptr<Context> context,
+SRInterface::SRInterface(std::shared_ptr<spire::Context> context,
                          const std::vector<std::string>& shaderDirs,
                          bool createThread, LogFunction logFP) :
     spire::Interface(context, shaderDirs, createThread, logFP),
