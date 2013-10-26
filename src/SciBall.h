@@ -33,10 +33,10 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SCIBALL_H
 
 #include <cstdint>
-#include "spire/src/Math.h"
+#include "namespaces.h"
+#include "spire/Interface.h"
 
-namespace spire { 
-namespace scirun { 
+namespace CPM_SPIRE_SCIRUN_NS {
 
 /// A reimplementation of Ken Shoemake's arcball camera. SCIRun 4's camera
 /// system is based completely off of Ken's code. The Code appears in
@@ -67,61 +67,61 @@ public:
   ///                       default is 0.75.
   /// \param screenToTCS  Transformation from screen coordinates
   ///                       to TCS. 'center' and 'radius' are given in TCS.
-  SciBall(const V3& center, float radius, const M44& screenToTCS = M44());
+  SciBall(const spire::V3& center, float radius,
+          const spire::M44& screenToTCS = spire::M44());
   virtual ~SciBall();
   
   /// Initiate an arc ball drag given the mouse click in screen coordinates.
   /// \param mouseScreenCoords  Mouse screen coordinates.
-  void beginDrag(const V2& mouseScreenCoords);
+  void beginDrag(const spire::V2& mouseScreenCoords);
 
   /// Informs the arcball when the mouse has been dragged.
   /// \param mouseScreenCoords  Mouse screen coordinates.
-  void drag(const V2& mouseScreenCoords);
+  void drag(const spire::V2& mouseScreenCoords);
 
   /// Retrieves the current transformation in TCS.
   /// Obtains full transformation of object in question. If the arc ball is 
   /// being used to control camera rotation, then this will contain all
   /// concatenated camera transformations.
-  M44 getTransformation() const;
+  spire::M44 getTransformation() const;
 
 private:
 
   /// Calculates our position on the ArcBall from 2D mouse position.
   /// \param tscMouse   TSC coordinates of mouse click.
-  V3 mouseOnSphere(const V3& tscMouse);
+  spire::V3 mouseOnSphere(const spire::V3& tscMouse);
 
   /// Construct a unit quaternion from two points on the unit sphere.
-  static Quat quatFromUnitSphere(const V3& from, const V3& to);
+  static spire::Quat quatFromUnitSphere(const spire::V3& from, const spire::V3& to);
 
-  V3    mCenter;   ///< Center of the arcball in target coordinate system.
-  float mRadius;              ///< Radius of the arcball in target coordinate system.
+  spire::V3   mCenter;        ///< Center of the arcball in target coordinate system.
+  float       mRadius;        ///< Radius of the arcball in target coordinate system.
 
   /// \note Both mQNow and mQDown would need to be updated if we allowed
   ///       default transformations.
 
-  Quat  mQNow;                ///< Current state of the rotation taking into account mouse.
+  spire::Quat mQNow;          ///< Current state of the rotation taking into account mouse.
                               ///< Essentially QDrag * QDown (QDown is a applied first, just
                               ///< as in matrix multiplication).
-  Quat  mQDown;               ///< State of the rotation since mouse down.
-  Quat  mQDrag;               ///< Dragged transform. Knows nothing of any prior 
+  spire::Quat mQDown;         ///< State of the rotation since mouse down.
+  spire::Quat mQDrag;         ///< Dragged transform. Knows nothing of any prior 
                               ///< transformations.
 
-  V3    mVNow;                ///< Most current TCS position of mouse (during drag).
-  V3    mVDown;               ///< TCS position of mouse when the drag was begun.
-  V3    mVSphereFrom;         ///< vDown mapped to the sphere of 'mRadius' centered at 'mCenter' in TCS.
-  V3    mVSphereTo;           ///< vNow mapped to the sphere of 'mRadius' centered at 'mCenter' in TCS.
+  spire::V3   mVNow;          ///< Most current TCS position of mouse (during drag).
+  spire::V3   mVDown;         ///< TCS position of mouse when the drag was begun.
+  spire::V3   mVSphereFrom;   ///< vDown mapped to the sphere of 'mRadius' centered at 'mCenter' in TCS.
+  spire::V3   mVSphereTo;     ///< vNow mapped to the sphere of 'mRadius' centered at 'mCenter' in TCS.
 
-  M44   mMatNow;              ///< Matrix representing the current rotation.
-  M44   mMatDown;             ///< Matrix representing the rotation when the mouse was first clicked.
+  spire::M44  mMatNow;        ///< Matrix representing the current rotation.
+  spire::M44  mMatDown;       ///< Matrix representing the rotation when the mouse was first clicked.
 
   /// \todo Add in constraint sets (you can display handles and constrain
   ///       rotations along those handles).
 
   /// Transform from screen coordinates to the target coordinate system.
-  M44   mScreenToTCS;
+  spire::M44  mScreenToTCS;
 };
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS
 
 #endif 

@@ -36,7 +36,7 @@
 
 #include "Spire/Core/ShaderUniformStateManTemplates.h"
 
-namespace spire {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 /// Common uniforms used by Spire.
 /// \todo Look into the ability to rename these uniforms in the future. This is
@@ -52,43 +52,43 @@ public:
   //----------------------------------------------------------------------------
 
   /// Inverse view to world matrix.
-  static std::tuple<const char*, UNIFORM_TYPE> getToCameraToProjection()
-  {return std::make_pair("uProjIV", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getToCameraToProjection()
+  {return std::make_pair("uProjIV", spire::UNIFORM_FLOAT_MAT4);}
 
   /// Projection matrix.
-  static std::tuple<const char*, UNIFORM_TYPE> getToProjection()
-  {return std::make_pair("uProj", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getToProjection()
+  {return std::make_pair("uProj", spire::UNIFORM_FLOAT_MAT4);}
 
   /// View to world.
-  static std::tuple<const char*, UNIFORM_TYPE> getCameraToWorld()
-  {return std::make_pair("uView", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getCameraToWorld()
+  {return std::make_pair("uView", spire::UNIFORM_FLOAT_MAT4);}
 
   /// Viewing vector for the camera (used in lighting calculations).
   /// Depends on the projection matrix -- in world space.
-  static std::tuple<const char*, UNIFORM_TYPE> getCameraViewVec()
-  {return std::make_pair("uCamViewVec", UNIFORM_FLOAT_VEC3);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getCameraViewVec()
+  {return std::make_pair("uCamViewVec", spire::UNIFORM_FLOAT_VEC3);}
 
   /// 'Up' vector for the camera -- in world space.
-  static std::tuple<const char*, UNIFORM_TYPE> getCameraUpVec()
-  {return std::make_pair("uCamUp", UNIFORM_FLOAT_VEC3);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getCameraUpVec()
+  {return std::make_pair("uCamUp", spire::UNIFORM_FLOAT_VEC3);}
 
   //----------------------------------------------------------------------------
   // Object and Combined Object/Camera Uniforms
   //----------------------------------------------------------------------------
   /// Object -> World -> Camera -> Projection
-  static std::tuple<const char*, UNIFORM_TYPE> getObjectToCameraToProjection()   
-  {return std::make_pair("uProjIVObject", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getObjectToCameraToProjection()   
+  {return std::make_pair("uProjIVObject", spire::UNIFORM_FLOAT_MAT4);}
 
   /// Object -> World to view transformation.
-  static std::tuple<const char*, UNIFORM_TYPE> getObjectToView()
-  {return std::make_pair("uViewObject", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getObjectToView()
+  {return std::make_pair("uViewObject", spire::UNIFORM_FLOAT_MAT4);}
 
   /// Object -> World transformformation.
-  static std::tuple<const char*, UNIFORM_TYPE> getObject()
-  {return std::make_pair("uObject", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getObject()
+  {return std::make_pair("uObject", spire::UNIFORM_FLOAT_MAT4);}
 
 };
 
-} // namespace Spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
 
 #endif 

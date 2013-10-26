@@ -33,12 +33,12 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SCIRUNINTERFACE_H
 
 #include <cstdint>
+#include "src/namespaces.h"
 #include "spire/Interface.h"
 #include "spire/src/LambdaInterface.h"
 #include "spire/src/ObjectLambda.h"
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 class SRCamera;
 class SciBall;
@@ -47,10 +47,10 @@ class SciBall;
 /// to operate SCIRun.
 /// \todo Think about how we are going to break apart this class.
 ///       There will be a lot of functionality behind it.
-class WIN_DLL SRInterface : public Interface
+class SRInterface : public Interface
 {
 public:
-  SRInterface(std::shared_ptr<Context> context,
+  SRInterface(std::shared_ptr<spire::Context> context,
               const std::vector<std::string>& shaderDirs,
               bool createThread, LogFunction logFP = LogFunction());
   ~SRInterface();
@@ -94,7 +94,7 @@ public:
 private:
 
   /// Calculates the screen space coordinates given the window coordinates.
-  V2 calculateScreenSpaceCoords(const glm::ivec2& mousePos);
+  spire::V2 calculateScreenSpaceCoords(const glm::ivec2& mousePos);
 
   /// Recalculates camera transform using the most relevant data.
   void buildAndApplyCameraTransform();
@@ -104,10 +104,10 @@ private:
   size_t                    mScreenWidth;   ///< Screen width in pixels.
   size_t                    mScreenHeight;  ///< Screen height in pixels.
 
-  V2                        mTransClick;    ///< Start of the translation.
+  spire::V2                 mTransClick;    ///< Start of the translation.
 
-  V3                        mCamAccumPosDown; ///< Accumulated translation / zoom when first clicked down.
-  V3                        mCamAccumPosNow;  ///< Accumulated translation / zoom currently.
+  spire::V3                 mCamAccumPosDown; ///< Accumulated translation / zoom when first clicked down.
+  spire::V3                 mCamAccumPosNow;  ///< Accumulated translation / zoom currently.
 
   MouseButton               mActiveDrag;    ///< The button we are currently dragging.
 
@@ -116,7 +116,6 @@ private:
 
 };
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS
 
 #endif 

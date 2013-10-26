@@ -29,22 +29,22 @@
 /// \author James Hughes
 /// \date   April 2013
 
+#include "namespaces.h"
 #include "SciBall.h"
-#include "Spire/Core/GLMathUtil.h"
+#include "spire/Core/GLMathUtil.h"
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 //------------------------------------------------------------------------------
-SciBall::SciBall(const V3& center, float radius, const M44& screenToTCS) :
+SciBall::SciBall(const spire::V3& center, float radius, const spire::M44& screenToTCS) :
     mCenter(center),
     mRadius(radius),
     mScreenToTCS(screenToTCS)
 {
   // glm uses the following format for quaternions: w,x,y,z.
   //        w,    x,    y,    z
-  Quat qOne(1.0f, 0.0f, 0.0f, 0.0f);
-  V3   vZero(0.0f, 0.0f, 0.0f);
+  spire::Quat qOne(1.0f, 0.0f, 0.0f, 0.0f);
+  spire::V3   vZero(0.0f, 0.0f, 0.0f);
 
   mVDown    = vZero;
   mVNow     = vZero;
@@ -58,9 +58,9 @@ SciBall::~SciBall()
 }
 
 //------------------------------------------------------------------------------
-V3 SciBall::mouseOnSphere(const V3& tscMouse)
+spire::V3 SciBall::mouseOnSphere(const spire::V3& tscMouse)
 {
-  V3 ballMouse;
+  spire::V3 ballMouse;
 
   // (m - C) / R
   ballMouse.x = (tscMouse.x - mCenter.x) / mRadius;
@@ -86,7 +86,7 @@ V3 SciBall::mouseOnSphere(const V3& tscMouse)
 }
 
 //------------------------------------------------------------------------------
-void SciBall::beginDrag(const V2& msc)
+void SciBall::beginDrag(const spire::V2& msc)
 {
   // The next two lines are usually a part of end drag. But end drag introduces
   // too much statefullness, so we are shortcircuiting it.
@@ -94,14 +94,14 @@ void SciBall::beginDrag(const V2& msc)
   mMatDown    = mMatNow;
 
   // Normal 'begin' code.
-  mVDown      = (mScreenToTCS * V4(msc.x, msc.y, 0.0f, 1.0f)).xyz();
+  mVDown      = (mScreenToTCS * spire::V4(msc.x, msc.y, 0.0f, 1.0f)).xyz();
 }
 
 //------------------------------------------------------------------------------
-void SciBall::drag(const V2& msc)
+void SciBall::drag(const spire::V2& msc)
 {
   // Regular drag code to follow...
-  mVNow       = (mScreenToTCS * V4(msc.x, msc.y, 0.0f, 1.0f)).xyz();
+  mVNow       = (mScreenToTCS * spire::V4(msc.x, msc.y, 0.0f, 1.0f)).xyz();
   mVSphereFrom= mouseOnSphere(mVDown);
   mVSphereTo  = mouseOnSphere(mVNow);
 
@@ -112,7 +112,7 @@ void SciBall::drag(const V2& msc)
   mQNow = mQDrag * mQDown;
 
   // Perform complex conjugate
-  Quat q = mQNow;
+  spire::Quat q = mQNow;
   q.x = -q.x;
   q.y = -q.y;
   q.z = -q.z;
@@ -121,9 +121,9 @@ void SciBall::drag(const V2& msc)
 }
 
 //------------------------------------------------------------------------------
-Quat SciBall::quatFromUnitSphere(const V3& from, const V3& to)
+spire::Quat SciBall::quatFromUnitSphere(const spire::V3& from, const spire::V3& to)
 {
-  Quat q;
+  spire::Quat q;
   q.x = from.y*to.z - from.z*to.y;
   q.y = from.z*to.x - from.x*to.z;
   q.z = from.x*to.y - from.y*to.x;
@@ -132,12 +132,11 @@ Quat SciBall::quatFromUnitSphere(const V3& from, const V3& to)
 }
 
 //------------------------------------------------------------------------------
-M44 SciBall::getTransformation() const
+spire::M44 SciBall::getTransformation() const
 {
   return mMatNow;
 }
 
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
 

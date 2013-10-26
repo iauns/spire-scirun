@@ -33,13 +33,11 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SRUNCAMERA_H
 
 #include "spire/src/Common.h"
-
 #include "SRInterface.h"
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
-/// Basic camera class for Spire, mimicking SCIRun v4.
+/// Basic camera class for spire, mimicking SCIRun v4.
 class SRCamera
 {
 public:
@@ -50,9 +48,9 @@ public:
   // IV = Inverse view matrix
   // P  = Projection matrix
   // m  = multiplication
-  const Spire::M44& getWorldToProjection() const  {return mPIV;}
-  const Spire::M44& getWorldToView() const        {return mIV;}
-  const Spire::M44& getViewToProjection() const   {return mP;}
+  const spire::M44& getWorldToProjection() const  {return mPIV;}
+  const spire::M44& getWorldToView() const        {return mIV;}
+  const spire::M44& getViewToProjection() const   {return mP;}
 
   /// Sets this camera to use a perspective projection transformation.
   void setAsPerspective();
@@ -61,21 +59,21 @@ public:
   void setAsOrthographic(float halfWidth, float halfHeight);
 
   /// Sets the current view transform (view to world space).
-  void setViewTransform(const Spire::M44& view);
+  void setViewTransform(const spire::M44& view);
 
   /// Default camera settings
   /// @{
-  static float getDefaultFOVY()   {return 32.0f * (Spire::PI / 180.0f);}
+  static float getDefaultFOVY()   {return 32.0f * (spire::PI / 180.0f);}
   static float getDefaultZNear()  {return 0.1f;}
   static float getDefaultZFar()   {return 1350.0f;}
   /// @}
 
 private:
 
-  Spire::M44            mPIV;         ///< Projection * Inverse View transformation.
-  Spire::M44            mIV;          ///< Inverse view transformation.
-  Spire::M44            mV;           ///< View matrix.
-  Spire::M44            mP;           ///< Projection transformation.
+  spire::M44            mPIV;         ///< Projection * Inverse View transformation.
+  spire::M44            mIV;          ///< Inverse view transformation.
+  spire::M44            mV;           ///< View matrix.
+  spire::M44            mP;           ///< Projection transformation.
   size_t                mTrafoSeq;    ///< Current sequence of the view transform.
                                       ///< Helps us determine when a camera is 'dirty'.
 
@@ -89,7 +87,6 @@ private:
 
 };
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
 
 #endif 

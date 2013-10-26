@@ -29,11 +29,11 @@
 /// \author James Hughes
 /// \date   March 2013
 
+#include "namespaces.h"
 #include "SRCamera.h"
 #include "SRCommonUniforms.h"
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 //------------------------------------------------------------------------------
 SRCamera::SRCamera(SRInterface& iface) :
@@ -46,8 +46,8 @@ SRCamera::SRCamera(SRInterface& iface) :
 {
   setAsPerspective();
 
-  Spire::M44 cam;
-  cam[3] = (Spire::V4(0.0f, 0.0f, 7.0f, 1.0f));
+  spire::M44 cam;
+  cam[3] = (spire::V4(0.0f, 0.0f, 7.0f, 1.0f));
   
   setViewTransform(cam);
 }
@@ -78,7 +78,7 @@ void SRCamera::setAsOrthographic(float halfWidth, float halfHeight)
 }
 
 //------------------------------------------------------------------------------
-void SRCamera::setViewTransform(const Spire::M44& trafo)
+void SRCamera::setViewTransform(const spire::M44& trafo)
 {
   ++mTrafoSeq;
 
@@ -96,9 +96,11 @@ void SRCamera::setViewTransform(const Spire::M44& trafo)
 
   // Projection matrix is oriented down negative z. So we are looking down 
   // negative z, which is -V3(mV[2].xyz()).
-  mInterface.addGlobalUniform(std::get<0>(SRCommonUniforms::getCameraViewVec()), -V3(mV[2].xyz()));
-  mInterface.addGlobalUniform(std::get<0>(SRCommonUniforms::getCameraUpVec()), V3(mV[1].xyz()));
+  mInterface.addGlobalUniform(std::get<0>(SRCommonUniforms::getCameraViewVec()), 
+                              -spire::V3(mV[2].xyz()));
+  mInterface.addGlobalUniform(std::get<0>(SRCommonUniforms::getCameraUpVec()),
+                              spire::V3(mV[1].xyz()));
 }
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
+

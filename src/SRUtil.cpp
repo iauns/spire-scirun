@@ -31,10 +31,9 @@
 
 #include "SRUtil.h"
 
-#include "Spire/Core/Common.h"
+#include "spire/Core/Common.h"
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
                                   size_t stride, float normalLength,
@@ -79,20 +78,20 @@ size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
   for (size_t inputVboPos = 0; inputVboPos + stride <= vboData->size();)
   {
     size_t inputOffset = inputVboPos + posOffset;
-    V3 position;
+    spire::V3 position;
     position.x = readFloat(&inputOffset);
     position.y = readFloat(&inputOffset);
     position.z = readFloat(&inputOffset);
 
     inputOffset = inputVboPos + normOffset;
-    V3 normal;
+    spire::V3 normal;
     normal.x = readFloat(&inputOffset);
     normal.y = readFloat(&inputOffset);
     normal.z = readFloat(&inputOffset);
 
     inputVboPos += stride;
 
-    V3 distal = position + normal * normalLength;
+    spire::V3 distal = position + normal * normalLength;
 
     // Write VBO
     writeFloat(rawOutVBO, &outVboPos, position.x);
@@ -111,6 +110,5 @@ size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
   return numInVertices;
 }
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
 

@@ -27,39 +27,15 @@
 */
 
 /// \author James Hughes
-/// \date   August 2013
+/// \date   October 2013
 
-#ifndef SRUTIL_H
-#define SRUTIL_H
-
-#include <cstdint>
-#include <string>
-#include <vector>
-#include <memory>
+#ifndef NAMESPACES_H
+#define NAMESPACES_H
 
 namespace CPM_SPIRE_SCIRUN_NS {
 
-// Misc SCIRun utilities.
+namespace spire = CPM_SPIRE_NS;
 
-/// \todo Possibly parameterize uint16_t output type for ibo using templates.
-
-/// Normal rendering. Expects position and normals to be floats.
-/// \param  vboData     The raw VBO that gets sent to spire.
-/// \param  stride      Stride between vertices.
-/// \param  normLength  Length of the normal.
-/// \param  posOffset   Offset to position.
-/// \param  normOffset  Offset to the normal.
-/// \param  out_vboData Output VBO data. Format: Position. Where the 3 elements
-///                     inside the position are floats.
-/// \param  out_iboData Output IBO data. Format: uint16_t, GL_LINE.
-/// \return The number of elements (GL_LINE) in the ibo data.
-size_t buildNormalRenderingForVBO(std::shared_ptr<std::vector<uint8_t>> vboData,
-                                  size_t stride, float normLength,
-                                  std::vector<uint8_t>& out_vboData,
-                                  std::vector<uint8_t>& out_iboData,
-                                  size_t posOffset = 0,
-                                  size_t normOffset = sizeof(float) * 3);
-
-} // namespace CPM_SPIRE_SCIRUN_NS
+} // namespace CPM_SPIRE_SCIRUN_NS 
 
 #endif 

@@ -29,17 +29,17 @@
 /// \author James Hughes
 /// \date   February 2013
 
+#include "namespaces.h"
 #include "SRInterface.h"
 #include "SciBall.h"
 #include "SRCamera.h"
 
-#include "Spire/Core/Hub.h"
-#include "Spire/Core/InterfaceImplementation.h"
+#include "spire/Core/Hub.h"
+#include "spire/Core/InterfaceImplementation.h"
 
 using namespace std::placeholders;
 
-namespace spire {
-namespace scirun {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 //------------------------------------------------------------------------------
 SRInterface::SRInterface(std::shared_ptr<Context> context,
@@ -52,7 +52,7 @@ SRInterface::SRInterface(std::shared_ptr<Context> context,
     mCamAccumPosDown(0.0f, 0.0f, 0.0f),
     mCamAccumPosNow(0.0f, 0.0f, 0.0f),
     mCamera(new SRCamera(*this)),                       // Should come after all vars have been initialized.
-    mSciBall(new SciBall(V3(0.0f, 0.0f, 0.0f), 1.0f))   // Should come after all vars have been initialized.
+    mSciBall(new SciBall(spire::V3(0.0f, 0.0f, 0.0f), 1.0f))   // Should come after all vars have been initialized.
 {
   buildAndApplyCameraTransform();
 }
@@ -75,13 +75,13 @@ void SRInterface::eventResize(size_t width, size_t height)
 }
 
 //------------------------------------------------------------------------------
-V2 SRInterface::calculateScreenSpaceCoords(const glm::ivec2& mousePos)
+spire::V2 SRInterface::calculateScreenSpaceCoords(const glm::ivec2& mousePos)
 {
   float windowOriginX = 0.0f;
   float windowOriginY = 0.0f;
 
   // Transform incoming mouse coordinates into screen space.
-  V2 mouseScreenSpace;
+  spire::V2 mouseScreenSpace;
   mouseScreenSpace.x = 2.0f * (static_cast<float>(mousePos.x) - windowOriginX) 
       / static_cast<float>(mScreenWidth) - 1.0f;
   mouseScreenSpace.y = 2.0f * (static_cast<float>(mousePos.y) - windowOriginY)
@@ -102,7 +102,7 @@ void SRInterface::inputMouseDown(const glm::ivec2& pos, MouseButton btn)
 
   if (btn == MOUSE_LEFT)
   {
-    V2 mouseScreenSpace = calculateScreenSpaceCoords(pos);
+    spire::V2 mouseScreenSpace = calculateScreenSpaceCoords(pos);
     mSciBall->beginDrag(mouseScreenSpace);
   }
   else if (btn == MOUSE_RIGHT)
@@ -119,24 +119,24 @@ void SRInterface::inputMouseMove(const glm::ivec2& pos, MouseButton btn)
   {
     if (btn == MOUSE_LEFT)
     {
-      V2 mouseScreenSpace = calculateScreenSpaceCoords(pos);
+      spire::V2 mouseScreenSpace = calculateScreenSpaceCoords(pos);
       mSciBall->drag(mouseScreenSpace);
 
       buildAndApplyCameraTransform();
     }
     else if (btn == MOUSE_RIGHT)
     {
-      V2 curTrans = calculateScreenSpaceCoords(pos);
-      V2 delta = curTrans - mTransClick;
+      spire::V2 curTrans = calculateScreenSpaceCoords(pos);
+      spire::V2 delta = curTrans - mTransClick;
       /// \todo This 2.5f value is a magic number, and it's real value should
       ///       be calculated based off of the world space position of the
       ///       camera. This value could easily be calculated based off of
       ///       mCamDistance.
-      V2 trans = (-delta) * 2.5f;
+      spire::V2 trans = (-delta) * 2.5f;
 
-      M44 camRot = mSciBall->getTransformation();
-      V3 translation =   static_cast<V3>(camRot[0].xyz()) * trans.x
-                       + static_cast<V3>(camRot[1].xyz()) * trans.y;
+      spire::M44 camRot = mSciBall->getTransformation();
+      spire::V3 translation =   static_cast<spire::V3>(camRot[0].xyz()) * trans.x
+                       + static_cast<spire::V3>(camRot[1].xyz()) * trans.y;
       mCamAccumPosNow = mCamAccumPosDown + translation;
 
       buildAndApplyCameraTransform();
@@ -160,16 +160,16 @@ void SRInterface::inputMouseUp(const glm::ivec2& /*pos*/, MouseButton /*btn*/)
 //------------------------------------------------------------------------------
 void SRInterface::buildAndApplyCameraTransform()
 {
-  M44 camRot      = mSciBall->getTransformation();
-  M44 finalTrafo  = camRot;
+  spire::M44 camRot      = mSciBall->getTransformation();
+  spire::M44 finalTrafo  = camRot;
 
   // Translation is a post rotation operation where as zoom is a pre transform
   // operation. We should probably ensure the user doesn't scroll passed zero.
   // Remember, we are looking down NEGATIVE z.
-  finalTrafo[3].xyz() = mCamAccumPosNow + static_cast<V3>(camRot[2].xyz()) * mCamDistance;
+  finalTrafo[3].xyz() = mCamAccumPosNow + static_cast<spire::V3>(camRot[2].xyz()) * mCamDistance;
 
   mCamera->setViewTransform(finalTrafo);
 }
 
-} // namespace scirun
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
+

@@ -34,9 +34,10 @@
 
 #include <tuple>
 
+#include "src/namespaces.h"
 #include "spire/src/ShaderUniformStateManTemplates.h"
 
-namespace spire {
+namespace CPM_SPIRE_SCIRUN_NS {
 
 /// Common uniforms used by Spire.
 /// \todo Look into the ability to rename these uniforms in the future. This is
@@ -51,11 +52,11 @@ public:
   // Common transformations
   //----------------------------------------------------------------------------
 
-  static std::tuple<const char*, UNIFORM_TYPE> getObjectToWorldTrafo()
-  {return std::make_pair("objToWorld", UNIFORM_FLOAT_MAT4);}
+  static std::tuple<const char*, spire::UNIFORM_TYPE> getObjectToWorldTrafo()
+  {return std::make_pair("objToWorld", spire::UNIFORM_FLOAT_MAT4);}
 
 };
 
-} // namespace spire
+} // namespace CPM_SPIRE_SCIRUN_NS 
 
 #endif 
