@@ -32,8 +32,12 @@
 #ifndef NAMESPACES_H
 #define NAMESPACES_H
 
+// 'Forward declaration' of namespaces.
+namespace CPM_SPIRE_NS {}
+
 namespace CPM_SPIRE_SCIRUN_NS {
 
+// Renaming namespaces in our top level.
 namespace spire = CPM_SPIRE_NS;
 
 } // namespace CPM_SPIRE_SCIRUN_NS 
