@@ -30,7 +30,7 @@
 /// \date   February 2013
 
 #include "SRInterface.h"
-#include "src/namespaces.h"
+#include "namespaces.h"
 #include "src/SciBall.h"
 #include "src/SRCamera.h"
 

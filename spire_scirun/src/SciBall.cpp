@@ -29,8 +29,9 @@
 /// \author James Hughes
 /// \date   April 2013
 
-#include "namespaces.h"
+#include "../namespaces.h"
 #include "SciBall.h"
+
 #include "spire/src/GLMathUtil.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {

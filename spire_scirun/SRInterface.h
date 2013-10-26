@@ -33,7 +33,7 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SCIRUNINTERFACE_H
 
 #include <cstdint>
-#include "src/namespaces.h"
+#include "namespaces.h"
 #include "spire/Interface.h"
 #include "spire/src/LambdaInterface.h"
 #include "spire/src/ObjectLambda.h"

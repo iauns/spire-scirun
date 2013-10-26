@@ -33,7 +33,9 @@
 #define SPIRE_APPSPECIFIC_SCIRUN_SCIBALL_H
 
 #include <cstdint>
-#include "namespaces.h"
+
+#include "../namespaces.h"
+
 #include "spire/Interface.h"
 
 namespace CPM_SPIRE_SCIRUN_NS {

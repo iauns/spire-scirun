@@ -30,7 +30,7 @@
 /// \date   August 2013
 
 #include "SRUtil.h"
-#include "src/namespaces.h"
+#include "namespaces.h"
 
 #include "spire/src/Common.h"
 
