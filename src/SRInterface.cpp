@@ -30,7 +30,7 @@
 /// \date   February 2013
 
 #include "namespaces.h"
-#include "SRInterface.h"
+#include "../SRInterface.h"
 #include "SciBall.h"
 #include "SRCamera.h"
 
@@ -45,7 +45,7 @@ namespace CPM_SPIRE_SCIRUN_NS {
 SRInterface::SRInterface(std::shared_ptr<Context> context,
                          const std::vector<std::string>& shaderDirs,
                          bool createThread, LogFunction logFP) :
-    Interface(context, shaderDirs, createThread, logFP),
+    spire::Interface(context, shaderDirs, createThread, logFP),
     mCamDistance(7.0f),
     mScreenWidth(640),
     mScreenHeight(480),
@@ -70,7 +70,7 @@ void SRInterface::eventResize(size_t width, size_t height)
 
   // Ensure glViewport is called appropriately.
   Hub::RemoteFunction resizeFun =
-      std::bind(InterfaceImplementation::resize, _1, width, height);
+      std::bind(spire::InterfaceImplementation::resize, _1, width, height);
   mHub->addFunctionToThreadQueue(resizeFun);
 }
 

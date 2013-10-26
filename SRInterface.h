@@ -47,7 +47,7 @@ class SciBall;
 /// to operate SCIRun.
 /// \todo Think about how we are going to break apart this class.
 ///       There will be a lot of functionality behind it.
-class SRInterface : public Interface
+class SRInterface : public spire::Interface
 {
 public:
   SRInterface(std::shared_ptr<spire::Context> context,
