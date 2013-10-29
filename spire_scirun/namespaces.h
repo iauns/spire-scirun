@@ -29,15 +29,14 @@
 /// \author James Hughes
 /// \date   October 2013
 
-#ifndef NAMESPACES_H
-#define NAMESPACES_H
+#ifndef MODULE_SPIRE_SCIRUN_NAMESPACES_H
+#define MODULE_SPIRE_SCIRUN_NAMESPACES_H
 
 // 'Forward declaration' of namespaces.
 namespace CPM_SPIRE_NS {}
 
 namespace CPM_SPIRE_SCIRUN_NS {
 
-// Renaming namespaces in our top level.
 namespace spire = CPM_SPIRE_NS;
 
 } // namespace CPM_SPIRE_SCIRUN_NS 
