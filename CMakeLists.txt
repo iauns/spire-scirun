@@ -34,7 +34,7 @@ endif()
 # Ensure spire module is present. We will use a pre-existing verision if found.
 CPM_AddModule("spire"
   GIT_REPOSITORY "https://github.com/SCIInstitute/spire"
-  GIT_TAG "origin/master"
+  GIT_TAG "v0.6.0"
   USE_EXISTING_VER TRUE
   )
 
